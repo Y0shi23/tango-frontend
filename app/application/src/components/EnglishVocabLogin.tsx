@@ -12,6 +12,7 @@ export default function EnglishVocabLogin() {
   // Form state
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
@@ -20,7 +21,8 @@ export default function EnglishVocabLogin() {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,11 +34,28 @@ export default function EnglishVocabLogin() {
     if (error) setError('');
   };
 
+  const validatePasswords = () => {
+    if (!isLogin && formData.password !== formData.confirmPassword) {
+      setError('パスワードが一致しません');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.username || !formData.password || (!isLogin && !formData.email)) {
       setError('すべての項目を入力してください');
+      return;
+    }
+
+    if (!isLogin && !formData.confirmPassword) {
+      setError('パスワード確認を入力してください');
+      return;
+    }
+
+    if (!validatePasswords()) {
       return;
     }
 
@@ -173,10 +192,15 @@ export default function EnglishVocabLogin() {
                   id="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
+                  inputMode="text"
                   required
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                  className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    !isLogin && formData.confirmPassword && formData.password !== formData.confirmPassword
+                      ? 'border-red-300'
+                      : 'border-gray-300'
+                  }`}
                   placeholder="パスワードを入力"
                 />
                 <button
@@ -188,6 +212,45 @@ export default function EnglishVocabLogin() {
                 </button>
               </div>
             </div>
+
+            {!isLogin && (
+              <div>
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                  パスワード確認
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    inputMode="text"
+                    required={!isLogin}
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                      formData.confirmPassword && formData.password !== formData.confirmPassword
+                        ? 'border-red-300'
+                        : 'border-gray-300'
+                    }`}
+                    placeholder="パスワードを再入力"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
+                {formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                  <p className="mt-1 text-sm text-red-600">パスワードが一致しません</p>
+                )}
+                {formData.confirmPassword && formData.password === formData.confirmPassword && formData.password && (
+                  <p className="mt-1 text-sm text-green-600">パスワードが一致しています</p>
+                )}
+              </div>
+            )}
 
             {isLogin && (
               <div className="flex items-center justify-between">
@@ -260,7 +323,7 @@ export default function EnglishVocabLogin() {
               onClick={() => {
                 setIsLogin(!isLogin);
                 setError('');
-                setFormData({ username: '', email: '', password: '' });
+                setFormData({ username: '', email: '', password: '', confirmPassword: '' });
               }}
               className="text-blue-600 hover:text-blue-700 font-medium"
             >
