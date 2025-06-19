@@ -6,7 +6,7 @@ export interface ApiWord {
   japanese: string;
   pronunciation?: string;
   example?: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: 1 | 2 | 3;
   level: number;
   category: string;
   mastered: boolean;

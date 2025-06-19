@@ -50,13 +50,21 @@ export default function Home() {
             </div>
             <h1 className="text-2xl font-bold text-gray-900">English Master</h1>
           </div>
-          <Link
-            href="/login"
-            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-lg flex items-center space-x-2"
-          >
-            <span>ログイン</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex items-center space-x-4">
+            <Link
+              href="/words"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+            >
+              英単語辞典
+            </Link>
+            <Link
+              href="/login"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-lg flex items-center space-x-2"
+            >
+              <span>ログイン</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -89,7 +97,8 @@ export default function Home() {
             {
               icon: "📚",
               title: "豊富な単語データベース",
-              description: "10,000以上の英単語を効率的に学習"
+              description: "10,000以上の英単語を効率的に学習",
+              link: "/words"
             },
             {
               icon: "🎯",
@@ -112,9 +121,17 @@ export default function Home() {
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 {feature.title}
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-4">
                 {feature.description}
               </p>
+              {feature.link && (
+                <Link
+                  href={feature.link}
+                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                >
+                  <span>今すぐ体験 →</span>
+                </Link>
+              )}
             </div>
           ))}
         </div>

@@ -100,7 +100,10 @@ export default function Dashboard() {
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">単語学習</h3>
             <p className="text-gray-600 mb-4">新しい単語を学習してボキャブラリーを増やしましょう</p>
-            <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors duration-200">
+            <button 
+              onClick={() => router.push('/vocabulary')}
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors duration-200"
+            >
               学習を開始
             </button>
           </div>
