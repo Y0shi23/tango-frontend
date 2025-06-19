@@ -4,6 +4,10 @@ export interface User {
   id: number;
   username: string;
   email: string;
+  preferred_accent: string;
+  study_level: string;
+  created_at: string;
+  last_login?: string;
 }
 
 export interface LoginRequest {
@@ -15,11 +19,23 @@ export interface RegisterRequest {
   username: string;
   email: string;
   password: string;
+  preferred_accent?: string;
+  study_level?: string;
 }
 
 export interface AuthResponse {
   message: string;
   token: string;
+  user: User;
+}
+
+export interface UpdateProfileRequest {
+  preferred_accent?: string;
+  study_level?: string;
+}
+
+export interface UpdateProfileResponse {
+  message: string;
   user: User;
 }
 
@@ -74,6 +90,24 @@ export class AuthAPI {
 
     const data = await response.json();
     return data.user;
+  }
+
+  static async updateProfile(token: string, profileData: UpdateProfileRequest): Promise<UpdateProfileResponse> {
+    const response = await fetch(`${API_BASE_URL}/api/v1/profile`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(profileData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'プロフィール更新に失敗しました');
+    }
+
+    return response.json();
   }
 }
 
