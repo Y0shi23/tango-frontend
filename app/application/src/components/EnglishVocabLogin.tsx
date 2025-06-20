@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Eye, EyeOff, Loader2, Mail, Lock, User, Github, Chrome } from 'lucide-react';
+import { Eye, EyeOff, Loader2, Mail, Lock, User, Github, Chrome, Award, CheckCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function EnglishVocabLogin() {
@@ -77,26 +77,32 @@ export default function EnglishVocabLogin() {
   };
 
   const learningFeatures = [
-    "科学的な単語記憶メソッドで効率学習",
-    "個人の学習ペースに合わせたカスタマイズ",
-    "ゲーム感覚で楽しく継続できるシステム",
-    "詳細な進捗追跡と成果の可視化",
-    "豊富な例文とネイティブ音声"
+    "🚀 科学的な単語記憶メソッドで効率学習",
+    "🎯 個人の学習ペースに合わせたカスタマイズ",
+    "🎮 ゲーム感覚で楽しく継続できるシステム",
+    "📊 詳細な進捗追跡と成果の可視化",
+    "🎵 豊富な例文とネイティブ音声"
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
-      <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-8 items-center">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-12 items-center">
         {/* Left side - Features */}
         <div className="hidden lg:block space-y-8">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              English Master で
+            <div className="flex items-center space-x-4 mb-6">
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                W
+              </div>
+              <h1 className="text-3xl font-bold text-gray-900">WordMaster</h1>
+            </div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              効率的な英単語学習で
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                効率的な英語学習
+              <span className="bg-gradient-to-r from-blue-500 to-emerald-500 bg-clip-text text-transparent">
+                レベルアップしよう
               </span>
-            </h1>
+            </h2>
             <p className="text-xl text-gray-600">
               最新の学習理論に基づいた、あなた専用の英語学習プラットフォーム
             </p>
@@ -105,24 +111,39 @@ export default function EnglishVocabLogin() {
           <div className="space-y-4">
             {learningFeatures.map((feature, index) => (
               <div key={index} className="flex items-center space-x-3">
-                <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-3 h-3 text-white" />
                 </div>
                 <span className="text-gray-700">{feature}</span>
               </div>
             ))}
           </div>
+
+          {/* 統計情報 */}
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">✨ 学習者の実績</h3>
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div>
+                <div className="text-2xl font-bold text-blue-500 mb-1">1,247+</div>
+                <div className="text-xs text-gray-600">平均学習単語数</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-emerald-500 mb-1">89%</div>
+                <div className="text-xs text-gray-600">平均正答率</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-amber-500 mb-1">42日</div>
+                <div className="text-xs text-gray-600">平均継続日数</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Right side - Login form */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md mx-auto">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 w-full max-w-md mx-auto">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
+            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4 text-white font-bold text-2xl">
+              W
             </div>
             <h2 className="text-2xl font-bold text-gray-900">
               {isLogin ? 'ログイン' : 'アカウント作成'}
@@ -247,7 +268,7 @@ export default function EnglishVocabLogin() {
                   <p className="mt-1 text-sm text-red-600">パスワードが一致しません</p>
                 )}
                 {formData.confirmPassword && formData.password === formData.confirmPassword && formData.password && (
-                  <p className="mt-1 text-sm text-green-600">パスワードが一致しています</p>
+                  <p className="mt-1 text-sm text-emerald-600">パスワードが一致しています</p>
                 )}
               </div>
             )}
@@ -275,7 +296,7 @@ export default function EnglishVocabLogin() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center space-x-2"
+              className="w-full bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center space-x-2"
             >
               {isLoading ? (
                 <>
