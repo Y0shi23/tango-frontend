@@ -42,15 +42,11 @@ else
 fi
 
 # 依存関係をインストール（必要な場合）
-if [ -f "package.json" ]; then
-  if [ ! -d "node_modules" ] || [ ! -f "node_modules/.package-lock.json" ]; then
-    echo "Installing dependencies..."
-    npm install
-  else
-    echo "Dependencies already installed."
-  fi
+if [ -f "package.json" ] && [ ! -d "node_modules" ]; then
+  echo "Installing dependencies..."
+  npm install
 fi
 
 # Next.js開発サーバーを起動
 echo "Starting Next.js development server..."
-exec npm run dev 
+npm run dev 
