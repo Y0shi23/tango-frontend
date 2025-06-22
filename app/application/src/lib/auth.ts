@@ -1,4 +1,19 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+// 環境に応じたAPI URLを設定
+const getApiBaseUrl = (): string => {
+  // ブラウザ環境での判定
+  if (typeof window !== 'undefined') {
+    // 本番環境の判定（ホスト名で判断）
+    if (window.location.hostname === 'tango.fumi042-server.top') {
+      return 'http://tango.fumi042-server.top';
+    }
+    // ローカル環境
+    return 'http://localhost:8080';
+  }
+  // サーバーサイドでは空文字列（相対パス）
+  return '';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 export interface User {
   id: number;
