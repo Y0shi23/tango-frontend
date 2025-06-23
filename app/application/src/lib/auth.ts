@@ -6,8 +6,8 @@ const getApiBaseUrl = (): string => {
     if (window.location.hostname === 'tango.fumi042-server.top') {
       return 'http://tango.fumi042-server.top';
     }
-    // ローカル環境 - Nginxプロキシ経由で相対パスを使用
-    return '';
+    // ローカル環境 - 直接バックエンドポートにアクセス
+    return 'http://localhost:8080';
   }
   // サーバーサイドでは空文字列（相対パス）
   return '';
