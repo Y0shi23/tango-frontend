@@ -154,7 +154,7 @@ export default function Dashboard() {
                     <p className="text-sm text-gray-600">今日の新しい単語 15個を学習しましょう</p>
                   </div>
                   <button 
-                    onClick={() => router.push('/vocabulary')}
+                    onClick={() => router.push('/settings')}
                     className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm transition-colors duration-200"
                   >
                     開始
